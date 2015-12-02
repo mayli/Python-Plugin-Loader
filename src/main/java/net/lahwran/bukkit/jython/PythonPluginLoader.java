@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -41,6 +41,7 @@ import org.python.core.PyString;
 import org.python.util.PythonInterpreter;
 import org.yaml.snakeyaml.error.YAMLException;
 
+import com.google.common.collect.ImmutableList;
 import com.master.bukkit.python.ReflectionHelper;
 
 /**
@@ -168,12 +169,12 @@ public class PythonPluginLoader implements PluginLoader {
                     file)));
         }
 
-        ArrayList<String> depend;
+        List<String> depend;
 
         try {
-            depend = (ArrayList<String>) description.getDepend();
+            depend = description.getDepend();
             if (depend == null) {
-                depend = new ArrayList<String>();
+                depend = ImmutableList.<String>of();
             }
         } catch (ClassCastException ex) {
             throw new InvalidPluginException(ex);
